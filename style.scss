@@ -1,0 +1,2838 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+:root {
+  --first-color: #016240;
+  --second-color: #ccc;
+  --bg: #fff;
+  --font: #000;
+  --taskbar-height: 52px;
+}
+body {
+  position: relative;
+  color: var(--font);
+  font-family: 'Segoe UI Variable', sans-serif !important;
+  font-size: 0.95em;
+  overflow: hidden;
+}
+html, body, #main-content {
+  height: 100%;
+}
+body > #main-content {
+  height: auto;
+  min-height: 80vh;
+}
+::selection {
+  background: rgba(0, 78, 31, 0.5);
+}
+::-moz-selection {
+  background: rgba(0, 78, 31, 0.5);
+}
+body .tooltip-inner {
+  background: #fff !important;
+  color: #000 !important;
+  font-size: 0.8em;
+  padding: 0.5em 0.7em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(1em);
+}
+body .tooltip.bs-tooltip-top .tooltip-arrow::before {
+  display: none;
+}
+body .tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+  display: none;
+}
+body .tooltip.bs-tooltip-start .tooltip-arrow::before {
+  display: none;
+}
+body .tooltip.bs-tooltip-end .tooltip-arrow::before {
+  display: none;
+}
+body[style*="--theme: dark"] .tooltip-inner {
+  background: #252d41 !important;
+  color: #fff !important;
+}
+* .resizer {
+  position: absolute;
+  user-select: none;
+  background: transparent;
+  z-index: 9999;
+}
+* .resizer.resizer-l {
+  cursor: w-resize;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 4px;
+}
+* .resizer.resizer-r {
+  cursor: w-resize;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 4px;
+}
+* .resizer.resizer-t {
+  cursor: s-resize;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+}
+* .resizer.resizer-b {
+  cursor: s-resize;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+}
+* .resizer.resizer-tl {
+  cursor: se-resize;
+  top: 0;
+  left: 0;
+  height: 10px;
+  width: 10px;
+}
+* .resizer.resizer-tr {
+  cursor: sw-resize;
+  top: 0;
+  right: 0;
+  height: 10px;
+  width: 10px;
+}
+* .resizer.resizer-bl {
+  cursor: sw-resize;
+  bottom: 0;
+  left: 0;
+  height: 10px;
+  width: 10px;
+}
+* .resizer.resizer-br {
+  cursor: se-resize;
+  bottom: 0;
+  right: 0;
+  height: 10px;
+  width: 10px;
+}
+w-desktop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 90px));
+  grid-template-rows: repeat(auto-fill, 90px);
+  grid-auto-flow: column;
+  gap: 1.25em;
+}
+w-desktop .desktop-drag {
+  position: absolute;
+  background: rgba(0, 153, 255, 0.5);
+  border: 1px solid #09f;
+}
+w-desktop w-desktop-icon {
+  cursor: default;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 90px;
+  height: 99px;
+  min-height: 90px;
+  background: rgba(255, 255, 255, 0);
+  border: 1px solid transparent;
+  border-radius: 5px;
+  user-select: none;
+}
+w-desktop w-desktop-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+w-desktop w-desktop-icon.active, w-desktop w-desktop-icon:active {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px dotted #fff;
+  outline: none !important;
+}
+w-desktop w-desktop-icon.active span, w-desktop w-desktop-icon:active span {
+  height: max-content;
+  overflow: visible;
+}
+w-desktop w-desktop-icon:focus {
+  border: 1px dotted #fff;
+  outline: none !important;
+}
+w-desktop w-desktop-icon.dragging {
+  cursor: default;
+}
+w-desktop w-desktop-icon img {
+  width: 50%;
+}
+w-desktop w-desktop-icon span {
+  display: block;
+  text-align: center;
+  font-size: 0.85em;
+  /* (Number of lines you want visible) * (line-height) */
+  max-height: 2.4em;
+  line-height: 1.2em;
+  color: #fff;
+  text-shadow: 0 1px 5px #000, 0 1px 5px #000;
+  padding: 0 0.25em;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none;
+}
+w-desktop w-desktop-icon.dragHovered {
+  position: relative;
+}
+w-desktop w-desktop-icon.dragHovered.above:before {
+  content: "";
+  position: absolute;
+  top: -0.25em;
+  width: 100%;
+  border-top: 3px solid #fff;
+}
+w-desktop w-desktop-icon.dragHovered.below:after {
+  content: "";
+  position: absolute;
+  bottom: -0.25em;
+  width: 100%;
+  border-bottom: 3px solid #fff;
+}
+w-desktop[style*="--theme: dark"] .desktop-drag {
+  background: rgba(0, 120, 215, 0.5);
+  border: 1px solid #0078d7;
+}
+w-startmenu {
+  opacity: 0;
+  position: absolute;
+  bottom: 4em;
+  left: 0;
+  width: 650px;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  background: linear-gradient(to bottom, rgba(245, 245, 245, 0.95), #f3f3f4);
+  backdrop-filter: blur(1em);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  user-select: none;
+  z-index: 98;
+}
+w-startmenu .thin-btn {
+  cursor: default;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  font-size: 0.8em;
+  padding: 0.25em 0.75em;
+}
+w-startmenu .thin-btn:active {
+  opacity: 0.8;
+}
+w-startmenu .start-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  padding: 0 2em;
+}
+w-startmenu .start-search .search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 35px;
+  border-radius: 20px;
+  padding: 0 1em;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+w-startmenu .start-search .search-bar:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+w-startmenu .start-search .search-bar:focus {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+w-startmenu .start-search .search-bar img {
+  margin-right: 0.5em;
+}
+w-startmenu .start-search .search-bar .search {
+  background: transparent;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 0.9em;
+  outline: 0;
+}
+w-startmenu .start_slide {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+w-startmenu .start_slide .left, w-startmenu .start_slide .right {
+  display: inline;
+  min-width: 650px;
+  transition: all 0.2s ease-in-out;
+}
+w-startmenu .start_slide .left {
+  display: flex;
+  flex-direction: column;
+}
+w-startmenu .start_slide .left .pinned-title {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em 4em;
+  font-size: 0.9em;
+  height: 5%;
+}
+w-startmenu .start_slide .left .pinned-apps {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 90px));
+  grid-template-rows: repeat(auto-fill, 90px);
+  grid-auto-flow: row;
+  gap: 1em;
+  margin: 0 2em;
+}
+w-startmenu .start_slide .left .pinned-apps w-startmenu-icon {
+  cursor: default;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 90px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  user-select: none;
+}
+w-startmenu .start_slide .left .pinned-apps w-startmenu-icon:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+w-startmenu .start_slide .left .pinned-apps w-startmenu-icon:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px dotted #fff;
+}
+w-startmenu .start_slide .left .pinned-apps w-startmenu-icon img {
+  width: 40%;
+}
+w-startmenu .start_slide .left .pinned-apps w-startmenu-icon span {
+  display: block;
+  text-align: center;
+  font-size: 0.8em;
+}
+w-startmenu .start_slide .left .pinned-apps.recommended {
+  display: flex;
+  max-height: 50px;
+  margin: 0 3em;
+  margin-bottom: 5em;
+}
+w-startmenu .start_slide .left .pinned-apps.recommended w-startmenu-icon {
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 100%;
+}
+w-startmenu .start_slide .left .pinned-apps.recommended w-startmenu-icon img {
+  width: initial;
+  height: 70%;
+  margin: 0 1em;
+}
+w-startmenu .start_slide .left .pinned-apps.recommended w-startmenu-icon span {
+  text-align: left;
+}
+w-startmenu .start_slide .left .pinned-apps.recommended w-startmenu-icon span small {
+  display: block;
+  opacity: 0.8;
+}
+w-startmenu .start_slide .right {
+  display: inline-block;
+  width: 100%;
+  overflow: scroll;
+}
+w-startmenu .start_slide .right .pinned-title {
+  display: flex;
+  justify-content: space-between;
+  margin: 1em 4em;
+  font-size: 0.9em;
+  height: 5%;
+}
+w-startmenu .start_slide .right .all-apps {
+  margin: 0 3em;
+}
+w-startmenu .start_slide .right .all-apps .header, w-startmenu .start_slide .right .all-apps w-startmenuall-icon {
+  display: block;
+  padding: 0.5em;
+  border-radius: 10px;
+}
+w-startmenu .start_slide .right .all-apps .header:hover, w-startmenu .start_slide .right .all-apps w-startmenuall-icon:hover {
+  background: #fff;
+}
+w-startmenu .start_slide .right .all-apps .header img, w-startmenu .start_slide .right .all-apps w-startmenuall-icon img {
+  width: 20px;
+  margin-right: 1em;
+}
+w-startmenu .start_slide .right .all-apps .header {
+  padding-left: 0.75em;
+}
+w-startmenu .footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3em;
+  font-size: 0.9em;
+  min-height: 10%;
+  background: rgba(0, 0, 0, 0.01);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+w-startmenu .footer .account {
+  cursor: default;
+  padding: 0.25em 0.75em;
+  border-radius: 5px;
+}
+w-startmenu .footer .account:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+w-startmenu .footer .account img {
+  border-radius: 100%;
+  width: 35px;
+  margin-right: 0.5em;
+  aspect-ratio: 1/1;
+}
+w-startmenu .footer .power {
+  cursor: default;
+  padding: 0.75em;
+  border-radius: 5px;
+}
+w-startmenu .footer .power:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+w-startmenu[style*="--theme: dark"] {
+  background: linear-gradient(to bottom, rgba(50, 51, 53, 0.95) 85%, rgba(46, 49, 55, 0.75));
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+w-startmenu[style*="--theme: dark"] .thin-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.025);
+}
+w-startmenu[style*="--theme: dark"] .start-search .search-bar {
+  background-color: #232324;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+w-startmenu[style*="--theme: dark"] .start-search .search-bar:hover {
+  background: rgba(35, 35, 36, 0.8);
+}
+w-startmenu[style*="--theme: dark"] .start-search .search-bar img {
+  filter: invert(1);
+}
+w-startmenu[style*="--theme: dark"] .start-search .search-bar .search {
+  color: #fff;
+}
+w-startmenu[style*="--theme: dark"] w-startmenu-icon:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+w-startmenu[style*="--theme: dark"] .header:hover, w-startmenu[style*="--theme: dark"] w-startmenuall-icon:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+w-startmenu[style*="--theme: dark"] .footer .account:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+w-startmenu[style*="--theme: dark"] .footer .power img {
+  filter: invert(1);
+}
+w-startmenu[style*="--theme: dark"] .footer .power:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+w-searchmenu {
+  opacity: 0;
+  position: absolute;
+  bottom: 4em;
+  left: 0;
+  width: 750px;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  background: linear-gradient(to bottom, rgba(245, 245, 245, 0.95), #f3f3f4);
+  backdrop-filter: blur(1em);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  user-select: none;
+  z-index: 98;
+}
+w-searchmenu .thin-btn {
+  cursor: default;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  font-size: 0.8em;
+  padding: 0.25em 0.75em;
+}
+w-searchmenu .thin-btn:active {
+  opacity: 0.8;
+}
+w-searchmenu .search-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  padding: 0 2em;
+}
+w-searchmenu .search-search .search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 35px;
+  border-radius: 20px;
+  padding: 0 1em;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+w-searchmenu .search-search .search-bar:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+w-searchmenu .search-search .search-bar:focus {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+w-searchmenu .search-search .search-bar img {
+  margin-right: 0.5em;
+}
+w-searchmenu .search-search .search-bar .search {
+  background: transparent;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 0.9em;
+  outline: 0;
+}
+w-searchmenu .split {
+  display: flex;
+  margin-top: -1em;
+  height: 100%;
+}
+w-searchmenu .split .left, w-searchmenu .split .right {
+  flex: 1;
+  margin: 1em 2em;
+  margin-bottom: 2em;
+}
+w-searchmenu .split .left w-searchmenu-recent-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin-top: 0.5em;
+}
+w-searchmenu .split .left w-searchmenu-recent-items .item {
+  display: flex;
+  align-items: center;
+  padding: 0.5em;
+  border-radius: 5px;
+}
+w-searchmenu .split .left w-searchmenu-recent-items .item:hover {
+  background: #fff;
+}
+w-searchmenu .split .left w-searchmenu-recent-items .item:active {
+  color: rgba(0, 0, 0, 0.7);
+}
+w-searchmenu .split .left w-searchmenu-recent-items .item img {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5em;
+}
+w-searchmenu .split .right {
+  min-width: 55%;
+}
+w-searchmenu .split .right w-searchmenu-quicksearches {
+  display: block;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  margin-top: 0.5em;
+  padding: 0.5em;
+}
+w-searchmenu .split .right w-searchmenu-quicksearches .item {
+  display: inline-block;
+  padding: 0.5em;
+  margin: 0.25em;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  font-size: 0.95em;
+  opacity: 0.9;
+}
+w-searchmenu .split .right w-searchmenu-quicksearches .item:active {
+  opacity: 0.7;
+}
+w-searchmenu[style*="--theme: dark"] {
+  background: linear-gradient(to bottom, rgba(50, 51, 53, 0.95) 85%, rgba(46, 49, 55, 0.75));
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+w-searchmenu[style*="--theme: dark"] .search-search .search-bar {
+  background-color: #232324;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+w-searchmenu[style*="--theme: dark"] .search-search .search-bar:hover {
+  background: rgba(35, 35, 36, 0.8);
+}
+w-searchmenu[style*="--theme: dark"] .search-search .search-bar img {
+  filter: invert(1);
+}
+w-searchmenu[style*="--theme: dark"] .search-search .search-bar .search {
+  color: #fff;
+}
+w-searchmenu[style*="--theme: dark"] w-searchmenu-recent-items .item:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+w-searchmenu[style*="--theme: dark"] w-searchmenu-quicksearches {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+w-searchmenu[style*="--theme: dark"] w-searchmenu-quicksearches .item {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+w-taskbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 52px;
+  background: rgba(231, 236, 249, 0.9);
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(1em);
+  padding: 0.25em;
+  z-index: 99;
+}
+w-taskbar .center {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+}
+w-taskbar .center w-taskbar-button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 45px;
+  aspect-ratio: 1/1;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  outline: 0;
+  transition: all 0.2s ease-in-out;
+}
+w-taskbar .center w-taskbar-button:hover, w-taskbar .center w-taskbar-button:focus {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+w-taskbar .center w-taskbar-button:active {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+w-taskbar .center w-taskbar-button:active .icon-img {
+  scale: 0.8;
+}
+w-taskbar .center w-taskbar-button.open:before {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  height: 3px;
+  width: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  transition: all 0.5s ease-in-out;
+}
+w-taskbar .center w-taskbar-button.open.focused {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+w-taskbar .center w-taskbar-button.open.focused:before {
+  width: 15px;
+  background: rgba(0, 0, 0, 0.7);
+}
+w-taskbar .center w-taskbar-button.open.focused.multiple:after {
+  content: "";
+  position: absolute;
+  right: 1px;
+  top: 0;
+  height: 99%;
+  width: 3px;
+  background: rgba(255, 255, 255, 0.7);
+  border-left: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: all 0.5s ease-in-out;
+}
+w-taskbar .center w-taskbar-button .icon-img {
+  height: 100%;
+  width: 100%;
+  background-position: center center;
+  background-size: 65%;
+  background-repeat: no-repeat;
+  transition: 0.1s ease-in-out;
+  animation: bounceInUp 0.5s ease-in-out;
+}
+w-taskbar .center w-taskbar-button.start .icon-img {
+  background-image: url(https://i.postimg.cc/ZBc8Vjp6/startbutton.png);
+  background-size: 50%;
+  animation: none;
+}
+w-taskbar .center .search {
+  user-select: none;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  background: #f3f6fc;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50px;
+  min-width: 100px;
+  height: 30px;
+  padding: 1.15em 2em;
+  font-size: 0.8em;
+  color: rgba(0, 0, 0, 0.8);
+  transition: all 0.2s ease-in-out;
+}
+w-taskbar .center .search img {
+  width: 14px;
+  margin-right: 0.5em;
+}
+w-taskbar .center .search:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+w-taskbar .center .search.focus {
+  background: linear-gradient(70deg, #2aa9eb, #0078d4);
+  color: #fff;
+}
+w-taskbar .center .search.focus img {
+  filter: brightness(0) invert(1);
+}
+w-taskbar w-system-tray {
+  display: flex;
+  gap: 0.5em;
+  height: 100%;
+  user-select: none;
+}
+w-taskbar w-system-tray .tray {
+  display: flex;
+  align-items: center;
+  padding: 0 0.25em;
+  border-radius: 5px;
+}
+w-taskbar w-system-tray .tray:hover {
+  background: rgba(241, 241, 241, 0.7);
+}
+w-taskbar w-system-tray .tray .icon {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  width: 18px;
+  margin: 0 0.25em;
+}
+w-taskbar w-system-tray .tray .icon img {
+  width: 100%;
+}
+w-taskbar w-system-tray .time {
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  text-align: right;
+  font-size: 0.85em;
+  height: 100%;
+  margin: 0 1em;
+  padding: 0.25em 0.75em;
+}
+w-taskbar w-system-tray .time:hover {
+  background: #f1f1f1;
+}
+w-taskbar[style*="--theme: dark"] {
+  background: rgba(29, 34, 43, 0.7);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+w-taskbar[style*="--theme: dark"] w-taskbar-button:hover, w-taskbar[style*="--theme: dark"] w-taskbar-button:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+w-taskbar[style*="--theme: dark"] w-taskbar-button:active {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+w-taskbar[style*="--theme: dark"] w-taskbar-button.open:before {
+  background: rgba(0, 153, 255, 0.05);
+}
+w-taskbar[style*="--theme: dark"] w-taskbar-button.open.focused {
+  background: rgba(255, 255, 255, 0.1);
+}
+w-taskbar[style*="--theme: dark"] w-taskbar-button.open.focused:before {
+  background: rgba(0, 0, 0, 0.1);
+}
+w-taskbar[style*="--theme: dark"] w-taskbar-button.open.focused.multiple:after {
+  background: rgba(0, 0, 0, 0.1);
+}
+w-taskbar[style*="--theme: dark"] .search {
+  background: rgba(243, 246, 252, 0.1);
+  color: #fff;
+}
+w-taskbar[style*="--theme: dark"] .search img {
+  filter: invert(100%);
+}
+w-taskbar[style*="--theme: dark"] .search:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+w-taskbar[style*="--theme: dark"] .tray:hover {
+  background: rgba(241, 241, 241, 0.1);
+}
+w-taskbar[style*="--theme: dark"] .tray .icon {
+  filter: invert(100%);
+}
+w-taskbar[style*="--theme: dark"] .time {
+  color: #fff;
+}
+w-taskbar[style*="--theme: dark"] .time:hover {
+  background: rgba(241, 241, 241, 0.1);
+}
+w-taskbar-thumbnails {
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+  display: flex;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(1em);
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  z-index: 99999;
+}
+w-taskbar-thumbnails .thumb {
+  padding: 0.5em;
+  border-radius: 10px;
+  max-width: 250px;
+  transition: all 0.2s ease-in-out;
+}
+w-taskbar-thumbnails .thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+w-taskbar-thumbnails .thumb span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25em;
+  font-size: 0.8em;
+}
+w-taskbar-thumbnails .thumb span p {
+  width: 100%;
+  margin-bottom: 0;
+}
+w-taskbar-thumbnails .thumb span img {
+  width: 25px;
+  height: 25px;
+  margin-right: 0.5em;
+}
+w-taskbar-thumbnails .thumb span i {
+  border-radius: 5px;
+  padding: 0.75em;
+}
+w-taskbar-thumbnails .thumb span i:hover {
+  color: #fff;
+  background: #c42b1c;
+}
+w-taskbar-thumbnails .thumb .thumbimg {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+w-taskbar-thumbnails .thumb .thumbimg.icon {
+  aspect-ratio: 1/1;
+  transform: translateX(50%);
+  max-width: 50% !important;
+}
+w-taskbar-thumbnails[style*="--theme: dark"] {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+w-taskbar-thumbnails[style*="--theme: dark"] .thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+w-systemtray-menu {
+  position: absolute;
+  top: -1000px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 2em rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.45);
+  border-radius: 10px;
+  backdrop-filter: blur(1em);
+  padding: 1.5em;
+  width: 100%;
+  max-width: 390px;
+  user-select: none;
+  opacity: 0;
+  z-index: 999;
+}
+w-systemtray-menu .systray_options {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 100px));
+  grid-template-rows: repeat(auto-fill, 66.66667px);
+  grid-auto-flow: row;
+  gap: 1em;
+  overflow: hidden;
+}
+w-systemtray-menu .systray_options w-systemtray-option {
+  min-width: 100px;
+  text-align: center;
+  font-size: 0.8em;
+}
+w-systemtray-menu .systray_options w-systemtray-option[disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+w-systemtray-menu .systray_options w-systemtray-option .upper {
+  display: flex;
+  background: #f8fafd;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+w-systemtray-menu .systray_options w-systemtray-option .upper.active {
+  background: #152d50;
+  color: #fff;
+}
+w-systemtray-menu .systray_options w-systemtray-option .upper.active div:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+w-systemtray-menu .systray_options w-systemtray-option .upper.active .icon img {
+  filter: invert(1) brightness(200%);
+}
+w-systemtray-menu .systray_options w-systemtray-option .upper.active .arrow {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+w-systemtray-menu .systray_options w-systemtray-option .upper div {
+  flex: 1;
+  border-radius: 5px;
+}
+w-systemtray-menu .systray_options w-systemtray-option .upper div:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+w-systemtray-menu .systray_options w-systemtray-option .upper .icon {
+  display: grid;
+  place-items: center;
+  padding: 1.25em 0.5em;
+}
+w-systemtray-menu .systray_options w-systemtray-option .upper .icon img {
+  max-height: 14px;
+}
+w-systemtray-menu .systray_options w-systemtray-option .upper .arrow {
+  display: grid;
+  place-items: center;
+  font-size: 2.2em;
+  padding: 0;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+w-systemtray-menu .systray_options w-systemtray-option .upper .arrow span {
+  display: block;
+  margin-top: -0.25em;
+}
+w-systemtray-menu .systray_options w-systemtray-option .caption {
+  margin: 0.5em 0;
+}
+w-systemtray-menu .sliders {
+  display: flex;
+  align-items: center;
+  margin: 1em 0;
+  gap: 2em;
+}
+w-systemtray-menu .sliders volume-slider {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 5px;
+  max-width: 80%;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+w-systemtray-menu .sliders volume-slider .p-resizer {
+  background: #152d50;
+  max-width: 1px;
+  min-width: 1px;
+  height: 1px;
+  scale: 15;
+  border-radius: 100%;
+}
+w-systemtray-menu .sliders volume-slider .left {
+  background: #152d50;
+  height: 100%;
+  border-radius: 10px;
+}
+w-systemtray-menu .bottom {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(240, 240, 240, 0.1);
+  margin: -1.5em;
+  margin-top: 2em;
+  padding: 0.25em;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+w-systemtray-menu .bottom .left, w-systemtray-menu .bottom .right {
+  display: flex;
+  gap: 0.5em;
+  font-size: 0.8em;
+}
+w-systemtray-menu .bottom .left span, w-systemtray-menu .bottom .right span {
+  display: grid;
+  place-items: center;
+  white-space: nowrap !important;
+  padding: 0.75em;
+  border-radius: 5px;
+}
+w-systemtray-menu .bottom .left span:hover, w-systemtray-menu .bottom .right span:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+w-systemtray-menu .bottom .left span img, w-systemtray-menu .bottom .right span img {
+  width: 18px;
+}
+w-systemtray-menu[style*="--theme: dark"] {
+  background: rgba(28, 32, 40, 0.85);
+  color: #fff;
+}
+w-systemtray-menu[style*="--theme: dark"] w-systemtray-option .upper {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+w-systemtray-menu[style*="--theme: dark"] w-systemtray-option .upper div:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+w-systemtray-menu[style*="--theme: dark"] w-systemtray-option .upper.active {
+  background: #4cc2ff;
+  color: #000;
+}
+w-systemtray-menu[style*="--theme: dark"] w-systemtray-option .upper.active div:hover {
+  background: #99ebff;
+}
+w-systemtray-menu[style*="--theme: dark"] w-systemtray-option .upper.active div:active, w-systemtray-menu[style*="--theme: dark"] w-systemtray-option .upper.active div:focus {
+  background: #0091f8;
+}
+w-systemtray-menu[style*="--theme: dark"] w-systemtray-option .upper.active .icon img {
+  filter: none;
+}
+w-systemtray-menu[style*="--theme: dark"] w-systemtray-option .upper.active .arrow {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+w-systemtray-menu[style*="--theme: dark"] .sliders img {
+  filter: invert(1);
+}
+w-systemtray-menu[style*="--theme: dark"] .sliders .p-resizer {
+  background: #4cc2ff;
+}
+w-systemtray-menu[style*="--theme: dark"] .sliders .left {
+  background: #4cc2ff;
+}
+w-systemtray-menu[style*="--theme: dark"] .bottom {
+  background: rgba(0, 0, 0, 0.2);
+}
+w-systemtray-menu[style*="--theme: dark"] .bottom img {
+  filter: invert(1);
+}
+w-systemtray-menu[style*="--theme: dark"] .bottom .left span:hover, w-systemtray-menu[style*="--theme: dark"] .bottom .right span:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+w-window {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background: rgba(230, 235, 249, 0.8);
+  box-shadow: 0 2px 2em rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 128, 0.75);
+  border-radius: 5px;
+  backdrop-filter: blur(1em);
+  min-width: 300px;
+  min-height: 12.5em;
+  overflow: hidden;
+  user-select: none;
+  opacity: 0;
+}
+w-window.transition {
+  transition: 0.2s ease-in-out;
+}
+w-window.fadeOut {
+  animation: windowFadeOut 0.2s;
+}
+w-window[focused=false] {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+w-window[focused=false]:not(:has(w-cmd)):not(:has(w-msedge)) {
+  background: rgba(255, 255, 255, 0.7) !important;
+}
+w-window[focused=false]:has(w-cmd) {
+  background: rgba(0, 0, 0, 0.8) !important;
+}
+w-window[focused=false]:has(w-msedge) {
+  background: rgba(24, 52, 92, 0.5) !important;
+}
+w-window[focused=false] .title, w-window[focused=false] .icons .button {
+  opacity: 0.5;
+}
+w-window[focused=false] .icons .button:hover {
+  opacity: 1;
+}
+w-window .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.125em;
+  padding-right: 0.25em;
+  user-select: none;
+}
+w-window .header * {
+  user-select: none;
+}
+w-window .header .icon, w-window .header .title, w-window .header space, w-window .header .icons, w-window .header .taskman_search {
+  flex: 1;
+}
+w-window .header .title {
+  flex: 1;
+  padding: 0.25em 0;
+  white-space: nowrap;
+  font-size: 0.8em;
+  text-align: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+w-window .header .icon {
+  max-width: 20px;
+  min-width: 20px;
+  width: 20px;
+  margin: 0.25em;
+  aspect-ratio: 1/0.85;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+w-window .header .icons {
+  display: flex;
+  align-items: stretch;
+  margin: -0.25em;
+}
+w-window .header .icons .button {
+  text-align: center;
+  width: 60px;
+  padding: 0.25em;
+}
+w-window .header .icons .button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+w-window .header .icons .button svg {
+  margin-top: -5px;
+}
+w-window .header .icons .button.button-close {
+  border-top-right-radius: 5px;
+}
+w-window .header .icons .button.button-close:hover {
+  background: #c42b1c !important;
+  color: #fff;
+}
+w-window.maximized {
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0 0 transparent;
+}
+w-window.maximized .icons .button {
+  border-radius: 0 !important;
+}
+w-window.minimized {
+  display: none;
+}
+w-window[style*="--theme: dark"] {
+  background: rgba(43, 46, 51, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+w-window[style*="--theme: dark"][focused=false]:not(:has(w-cmd)):not(:has(w-msedge)):not(:has(w-settings)) {
+  background: rgba(43, 46, 51, 0.7) !important;
+}
+w-window[style*="--theme: dark"][focused=false]:has(w-settings) {
+  background: rgba(43, 46, 51, 0.8) !important;
+}
+w-window[style*="--theme: dark"] .header .icons .button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+w-notifications-bar {
+  position: absolute;
+  top: -1000px;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 2px 2em rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.45);
+  border-radius: 10px;
+  backdrop-filter: blur(1em);
+  padding: 1em;
+  min-width: 350px;
+  min-height: 400px;
+  user-select: none;
+  opacity: 0;
+  z-index: 999;
+}
+w-notifications-bar .clearall {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  font-size: 0.8em;
+  background: #f1f1f1;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 0.25em 0.5em;
+}
+w-notifications-bar .clearall:hover {
+  background: rgba(241, 241, 241, 0.5);
+}
+w-notifications-bar w-notification-item {
+  position: relative;
+  display: block;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 1em;
+  margin: -0.75em;
+}
+w-notifications-bar w-notification-item small {
+  font-size: 0.8em;
+  color: rgba(0, 0, 0, 0.7);
+}
+w-notifications-bar w-notification-item small:not([style]) {
+  position: absolute;
+  top: 5px;
+  left: 1em;
+}
+w-notifications-bar w-notification-item small[style] {
+  display: none;
+  position: absolute;
+  top: 5px;
+  right: 1em;
+}
+w-notifications-bar w-notification-item:hover [style] {
+  display: block;
+}
+w-notifications-bar[style*="--theme: dark"] {
+  background: rgba(28, 32, 40, 0.75);
+  color: #fff;
+}
+w-notifications-bar[style*="--theme: dark"] .clearall {
+  background: rgba(255, 255, 255, 0.05);
+}
+w-notifications-bar[style*="--theme: dark"] .clearall:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+w-notifications-bar[style*="--theme: dark"] w-notification-item {
+  background: rgba(255, 255, 255, 0.1);
+}
+w-notifications-bar[style*="--theme: dark"] w-notification-item small {
+  color: rgba(255, 255, 255, 0.7);
+}
+w-context-menu {
+  opacity: 0;
+  display: block;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 2em rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  backdrop-filter: blur(1em);
+  font-size: 0.9em;
+  min-width: max-content;
+  user-select: none;
+  z-index: 999;
+}
+w-context-menu hr {
+  margin: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+w-context-menu .top-menu {
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.25em;
+  margin-bottom: 0.25em;
+}
+w-context-menu .top-menu .top-menu-item {
+  display: grid;
+  place-items: center;
+  height: 35px;
+  width: 35px;
+  margin: 0.25em;
+  border-radius: 5px;
+}
+w-context-menu .top-menu .top-menu-item:hover {
+  background: rgba(0, 0, 0, 0.065);
+}
+w-context-menu .top-menu .top-menu-item:active {
+  background: rgba(0, 0, 0, 0.035);
+}
+w-context-menu .top-menu .top-menu-item[disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+w-context-menu .top-menu .top-menu-item img {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 20px;
+  aspect-ratio: 1/1;
+}
+w-context-menu .menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25em 1em;
+  margin: 0.25em;
+  border-radius: 5px;
+}
+w-context-menu .menu-item:hover {
+  background: rgba(0, 0, 0, 0.065);
+}
+w-context-menu .menu-item:active {
+  background: rgba(0, 0, 0, 0.035);
+}
+w-context-menu .menu-item[disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+w-context-menu .menu-item img {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 18px;
+  aspect-ratio: 1/1;
+  margin-top: -5px;
+  margin-right: 0.75em;
+  border: 0;
+}
+w-context-menu .menu-item .more {
+  display: inline-block;
+  margin-top: -5px;
+  font-size: 1.5em;
+}
+w-context-menu.compact hr {
+  margin: 0.25em 0;
+}
+w-context-menu.compact .menu-item {
+  margin: 0 0.25em;
+  padding: 0.1em 1em;
+}
+w-context-menu.compact .menu-item:first-of-type {
+  margin-top: 0.25em;
+}
+w-context-menu.compact .menu-item:last-of-type {
+  margin-bottom: 0.25em;
+}
+w-context-menu[style*="--theme: dark"] {
+  background: rgba(43, 46, 51, 0.9);
+  color: #fff;
+}
+w-context-menu[style*="--theme: dark"] .top-menu-item:hover, w-context-menu[style*="--theme: dark"] .menu-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+w-context-menu[style*="--theme: dark"] .top-menu-item:active, w-context-menu[style*="--theme: dark"] .menu-item:active {
+  background: rgba(255, 255, 255, 0.05);
+}
+w-context-menu[style*="--theme: dark"] .invert img {
+  filter: invert(1) hue-rotate(180deg) !important;
+}
+w-getstarted {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+w-getstarted #pane {
+  flex: 1;
+}
+w-getstarted #pane .slide {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+w-getstarted #pane .slide.s1 {
+  display: flex;
+  align-items: center;
+}
+w-getstarted #pane .slide.s1 .left {
+  flex: 1;
+  padding: 5em;
+  max-width: 40%;
+}
+w-getstarted #pane .slide.s1 .img {
+  flex: 1;
+  text-align: right;
+}
+w-getstarted #pane .slide.s1 .img img {
+  width: 100%;
+}
+w-getstarted #pane .slide.s2 {
+  display: flex;
+  align-items: center;
+}
+w-getstarted #pane .slide.s2 .left {
+  flex: 1;
+  padding: 5em;
+  max-width: 40%;
+}
+w-getstarted #pane .slide.s2 .img {
+  flex: 1;
+  text-align: right;
+}
+w-getstarted #pane .slide.s2 .img img {
+  width: 100%;
+}
+w-getstarted #pane .slide .slidebtn {
+  display: inline-block;
+  background: #152d50;
+  color: #fff;
+  padding: 0.5em 2em;
+  border-radius: 4px;
+}
+w-getstarted #pane .slide .slidebtn:hover {
+  filter: brightness(150%);
+}
+w-getstarted .statusbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5em;
+}
+w-getstarted .statusbar .nav-btn {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1/1;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  width: 30px;
+}
+w-getstarted .statusbar .nav-btn[disabled], w-getstarted .statusbar .nav-btn:active {
+  opacity: 0.5;
+}
+w-getstarted .statusbar .nav-btn[disabled] {
+  pointer-events: none;
+}
+w-getstarted .statusbar .nav-btn img {
+  max-width: 14px;
+}
+w-getstarted[style*="--theme: dark"] #pane .slidebtn {
+  background: #4cc2ff;
+  color: #000;
+}
+w-getstarted[style*="--theme: dark"] .statusbar .nav-btn {
+  background: #2d2d2d;
+}
+w-getstarted[style*="--theme: dark"] .statusbar .nav-btn:hover {
+  background: #323232;
+}
+w-getstarted[style*="--theme: dark"] .statusbar .nav-btn img {
+  filter: invert(1);
+}
+w-explorer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+w-explorer .menu_bar, w-explorer .menu_bar_2, w-explorer .body, w-explorer .status_bar {
+  flex: 1;
+}
+w-explorer .menu_bar {
+  display: flex;
+  gap: 0.5em;
+  background: rgba(255, 255, 255, 0.5);
+  max-height: 50px;
+  width: 100%;
+  padding: 0.5em;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.25);
+}
+w-explorer .menu_bar .item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+  border-radius: 5px;
+  font-size: 0.8em;
+  transition: all 0.2s ease-in-out;
+}
+w-explorer .menu_bar .item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+w-explorer .menu_bar .item:active {
+  background: rgba(0, 0, 0, 0.025);
+}
+w-explorer .menu_bar .item[disabled] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+w-explorer .menu_bar .item img {
+  height: 15px;
+  margin: 0 5px;
+}
+w-explorer .menu_bar .seperator {
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+}
+w-explorer .menu_bar_2 {
+  background: #fff;
+  max-height: 50px;
+  min-height: 50px;
+  display: flex;
+  gap: 0.2em;
+  padding: 0.5em;
+}
+w-explorer .menu_bar_2 .item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-size: 0.8em;
+  opacity: 0.6;
+  transition: all 0.2s ease-in-out;
+}
+w-explorer .menu_bar_2 .item:hover {
+  background: rgba(204, 232, 255, 0.5);
+  border: 1px solid #cce8ff;
+  opacity: 1;
+}
+w-explorer .menu_bar_2 .item:active {
+  background: #cce8ff;
+  border: 1px solid #000, 0.5;
+}
+w-explorer .menu_bar_2 .item[disabled] {
+  pointer-events: none;
+  opacity: 0.4;
+}
+w-explorer .menu_bar_2 .item img {
+  width: 15px;
+  height: 15px;
+  margin: 0 5px;
+}
+w-explorer .menu_bar_2 w-explorer-address-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.8em;
+  padding: 0.2em 0.5em;
+}
+w-explorer .menu_bar_2 w-explorer-address-bar img {
+  width: 16px;
+  aspect-ratio: 1/1;
+  margin-right: 5px;
+}
+w-explorer .menu_bar_2 w-explorer-address-bar .addressbar-div {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+w-explorer .menu_bar_2 w-explorer-address-bar .addressbar-div span {
+  display: flex;
+  align-items: center;
+  padding: 0 0.25em;
+  max-height: 100%;
+  border: 1px solid transparent;
+}
+w-explorer .menu_bar_2 w-explorer-address-bar .addressbar-div span:hover {
+  background: rgba(204, 232, 255, 0.5);
+  border: 1px solid #cce8ff;
+}
+w-explorer .menu_bar_2 w-explorer-address-bar .addressbar-input {
+  display: none;
+  height: 100%;
+  width: 100%;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 transparent !important;
+}
+w-explorer .menu_bar_2 w-explorer-address-bar:focus-within {
+  border: 1px solid #0078d4;
+}
+w-explorer .menu_bar_2 .search {
+  flex: 1;
+  max-width: 30%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 0.8em;
+  padding: 0.2em 0.5em;
+  padding-right: 5%;
+  background: transparent;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAbUExURYuLi3t7e5eXl3h4eImJiYqKioiIiI+PjwAAABZYjb4AAAAJdFJOU///////////AFNPeBIAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABOSURBVChTXY7REgAgBASJ4v+/OJok9sG4neYE2kgBePYQg5yRgtgG0xNgq0EzBF6B/QVnx7KxskPOkbwiJOUfngMXf3ZRsouSb+lHE6obn1IHBKRajr8AAAAASUVORK5CYII=);
+  background-repeat: no-repeat;
+  background-position: 95% center;
+}
+w-explorer .menu_bar_2 .search:focus {
+  border: 1px solid #0078d4;
+}
+w-explorer .body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+w-explorer .body .p-resizer {
+  width: 2px;
+  cursor: ew-resize;
+}
+w-explorer .body w-explorer-navigation-bar {
+  display: flex;
+  flex-direction: column;
+  padding: 1em 0;
+  background: #fff;
+  min-width: 200px;
+  font-size: 0.9em;
+  overflow-y: scroll;
+}
+w-explorer .body w-explorer-navigation-bar hr {
+  margin: 1em auto;
+  width: 90%;
+  color: #666;
+}
+w-explorer .body w-explorer-navigation-bar w-explorer-navigation-bar-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5em;
+  padding-left: 2em;
+}
+w-explorer .body w-explorer-navigation-bar w-explorer-navigation-bar-item:hover {
+  background: rgba(204, 232, 255, 0.5);
+}
+w-explorer .body w-explorer-navigation-bar w-explorer-navigation-bar-item .dropdown {
+  margin-left: -1em;
+  margin-right: 0.65em;
+  margin-top: -5px;
+  opacity: 0.4;
+  scale: 1.8;
+}
+w-explorer .body w-explorer-navigation-bar w-explorer-navigation-bar-item .dropdown:hover {
+  opacity: 1;
+}
+w-explorer .body w-explorer-navigation-bar w-explorer-navigation-bar-item img {
+  width: 20px;
+  margin-right: 0.5em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+w-explorer .status_bar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+  background: #fff;
+  min-height: 25px;
+  max-height: 25px;
+  font-size: 0.8em;
+}
+w-explorer .status_bar span {
+  display: inline-block;
+  min-width: 12%;
+  padding: 0 1em;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+w-explorer .explorer_body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%;
+  background: #fff;
+  padding: 0.5em;
+  overflow: hidden;
+}
+w-explorer .explorer_body .toggle {
+  display: block;
+  padding: 0.25em 0.5em;
+  margin-bottom: 0.5em;
+  border-radius: 3px;
+  color: #1f32b1;
+}
+w-explorer .explorer_body .toggle .dropdown {
+  display: inline-block;
+  font-size: 1.2em;
+  rotate: 90deg;
+}
+w-explorer .explorer_body .toggle:hover {
+  background: #e5f3ff;
+}
+w-explorer .explorer_body .folderempty {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  margin-top: 0.5em;
+}
+w-explorer .explorer_body w-explorer-pane {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-rows: repeat(auto-fill, 66.66667px);
+  grid-auto-flow: rows;
+  gap: 1em;
+  height: 100%;
+  overflow-y: scroll;
+}
+w-explorer .explorer_body w-explorer-pane w-explorer-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding-left: 1em;
+  border: 1px solid transparent;
+  height: 66.66667px !important;
+  border-radius: 3px;
+}
+w-explorer .explorer_body w-explorer-pane w-explorer-icon img {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 65%;
+}
+w-explorer .explorer_body w-explorer-pane w-explorer-icon .progress {
+  background: #ddd;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  height: 15px;
+  margin: 0.15em 0;
+}
+w-explorer .explorer_body w-explorer-pane w-explorer-icon .progress div {
+  background: #26a0da;
+}
+w-explorer .explorer_body w-explorer-pane w-explorer-icon span small {
+  display: block;
+  color: rgba(0, 0, 0, 0.5);
+}
+w-explorer .explorer_body w-explorer-pane w-explorer-icon:hover {
+  background: #e5f3ff;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+}
+w-explorer .explorer_body w-explorer-pane w-explorer-icon:focus {
+  background: #cce8ff;
+}
+w-explorer[style*="--theme: dark"] .menu_bar {
+  background: rgba(26, 32, 43, 0.5);
+}
+w-explorer[style*="--theme: dark"] .menu_bar .item img {
+  filter: invert(1) hue-rotate(180deg);
+}
+w-explorer[style*="--theme: dark"] .menu_bar_2 {
+  background: #191919;
+}
+w-explorer[style*="--theme: dark"] .menu_bar_2 .item img {
+  filter: invert(1) hue-rotate(180deg);
+}
+w-explorer[style*="--theme: dark"] .menu_bar_2 .item:hover {
+  background: rgba(204, 232, 255, 0.1);
+  border: 1px solid rgba(204, 232, 255, 0.1);
+  opacity: 1;
+}
+w-explorer[style*="--theme: dark"] w-explorer-address-bar {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+w-explorer[style*="--theme: dark"] w-explorer-address-bar .addressbar-div span:hover {
+  background: rgba(204, 232, 255, 0.1);
+  border: 1px solid rgba(204, 232, 255, 0.1);
+}
+w-explorer[style*="--theme: dark"] w-explorer-address-bar:focus-within {
+  border: 1px solid #0078d4;
+}
+w-explorer[style*="--theme: dark"] .search {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+w-explorer[style*="--theme: dark"] .body w-explorer-navigation-bar {
+  background: #191919;
+}
+w-explorer[style*="--theme: dark"] .body w-explorer-navigation-bar w-explorer-navigation-bar-item:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+w-explorer[style*="--theme: dark"] .explorer_body {
+  background: #191919;
+}
+w-explorer[style*="--theme: dark"] .explorer_body .toggle {
+  color: #fff;
+}
+w-explorer[style*="--theme: dark"] .explorer_body .toggle:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+w-explorer[style*="--theme: dark"] .explorer_body .folderempty {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 0.5em;
+}
+w-explorer[style*="--theme: dark"] .explorer_body w-explorer-pane w-explorer-icon span small {
+  color: rgba(255, 255, 255, 0.5);
+}
+w-explorer[style*="--theme: dark"] .explorer_body w-explorer-pane w-explorer-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+w-explorer[style*="--theme: dark"] .status_bar {
+  background: #1c1c1c;
+}
+.msedge_tabs {
+  display: flex;
+  margin-top: -0.15em;
+}
+.msedge_tabs w-edge-tab {
+  flex: 1;
+  max-width: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f1f1f1;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  padding: 0.5em 1em;
+  font-size: 0.9em;
+  color: #000;
+  z-index: 1;
+}
+.msedge_tabs w-edge-tab img {
+  width: 14px;
+  height: 14px;
+  margin-right: 1em;
+}
+.msedge_tabs w-edge-tab .close_tab {
+  display: grid;
+  place-items: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 5px;
+  margin-right: -0.5em;
+}
+.msedge_tabs w-edge-tab .close_tab img {
+  scale: 0.5;
+}
+.msedge_tabs w-edge-tab .close_tab:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+.msedge_tabs[style*="--theme: dark"] w-edge-tab {
+  background: #3b3b3b;
+  color: #fff;
+}
+.msedge_tabs[style*="--theme: dark"] w-edge-tab img {
+  filter: invert(1);
+}
+w-msedge {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+w-msedge w-edge-toolbar {
+  display: flex;
+  gap: 0.2em;
+  padding: 0.25em;
+  background: #f1f1f1;
+  max-height: 45px;
+  min-height: 45px;
+  margin-top: -5px;
+}
+w-msedge w-edge-toolbar .seperator {
+  margin: 0 0.5em;
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+}
+w-msedge w-edge-toolbar .item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-size: 0.8em;
+  transition: all 0.2s ease-in-out;
+}
+w-msedge w-edge-toolbar .item:hover {
+  background: rgba(0, 0, 0, 0.05);
+  opacity: 1;
+}
+w-msedge w-edge-toolbar .item:active {
+  background: rgba(0, 0, 0, 0.1);
+}
+w-msedge w-edge-toolbar .item[disabled] {
+  opacity: 0.2;
+  pointer-events: none;
+}
+w-msedge w-edge-toolbar .item img {
+  width: 15px;
+  height: 15px;
+  margin: 0 5px;
+}
+w-msedge w-edge-toolbar .item.profile img {
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+}
+w-msedge w-edge-toolbar .search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  background: #fff;
+  margin: 0.25em 0;
+  padding: 0 1em;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.05);
+}
+w-msedge w-edge-toolbar .search img {
+  width: 13px;
+  height: 13px;
+}
+w-msedge w-edge-toolbar .search input {
+  background: transparent;
+  border: 0;
+  padding: 0.25em 1em;
+  font-size: 0.85em;
+  flex: 1;
+}
+w-msedge w-edge-toolbar .search input:focus {
+  border: 0 !important;
+  outline: 0 !important;
+}
+w-msedge .browser {
+  flex: 1;
+  background: #fff;
+  width: 100%;
+  z-index: 0;
+}
+w-msedge[style*="--theme: dark"] w-edge-toolbar {
+  background: #3b3b3b;
+}
+w-msedge[style*="--theme: dark"] w-edge-toolbar .item:not(.profile) img {
+  filter: invert(1);
+}
+w-msedge[style*="--theme: dark"] w-edge-toolbar .item:not(.profile):hover {
+  background: rgba(255, 255, 255, 0.075);
+}
+w-msedge[style*="--theme: dark"] w-edge-toolbar .search {
+  background: rgba(0, 0, 0, 0.1);
+}
+w-msedge[style*="--theme: dark"] w-edge-toolbar .search img {
+  filter: invert(1);
+}
+w-msedge[style*="--theme: dark"] w-edge-toolbar .search input {
+  color: #fff;
+}
+w-msedge[style*="--theme: dark"] w-edge-toolbar .search input:focus {
+  border: 1px solid #09f !important;
+  outline: 0 !important;
+}
+w-notepad {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+w-notepad .menu_bar, w-notepad textarea, w-notepad .status_bar {
+  flex: 1;
+}
+w-notepad .menu_bar {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.25em;
+  max-height: 25px;
+  font-size: 0.85em;
+  padding: 0 0.35em;
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+w-notepad .menu_bar span {
+  border-radius: 2px;
+  padding: 0.25em 0.5em;
+}
+w-notepad .menu_bar span:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+w-notepad textarea {
+  font-size: 0.9em;
+  width: 100%;
+  border: 0;
+  padding: 0.25em;
+  resize: none;
+  overflow: auto;
+}
+w-notepad textarea:focus {
+  outline: 0 !important;
+}
+w-notepad .status_bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1em;
+  background: #eee;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  max-height: 25px;
+  font-size: 0.8em;
+}
+w-notepad .status_bar span {
+  display: inline-block;
+  min-width: 12%;
+  padding: 0 1em;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+w-notepad[style*="--theme: dark"] .menu_bar {
+  background: #1a202c;
+  color: #fff;
+}
+w-notepad[style*="--theme: dark"] .menu_bar span:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+w-notepad[style*="--theme: dark"] textarea {
+  background: #191919;
+  color: #fff;
+}
+w-notepad[style*="--theme: dark"] .status_bar {
+  background: #1a202c;
+  color: #fff;
+}
+w-notepad[style*="--theme: dark"] .status_bar span {
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+w-cmd {
+  flex: 1;
+}
+w-cmd .cmd {
+  background: rgba(12, 12, 12, 0.9);
+  color: #fff;
+  font-family: cascadia mono;
+  padding: 0.5em;
+  height: 100%;
+  width: 100%;
+  resize: none;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 transparent !important;
+}
+.taskman_search {
+  padding: 0.25em 5%;
+  min-width: 60%;
+}
+.taskman_search input {
+  background-size: 15px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  font-size: 0.85em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 0.3em;
+  padding-left: 3em;
+  width: 100%;
+}
+.taskman_search input:focus {
+  outline: 0;
+  border-bottom: 2px solid #152d50;
+}
+.taskman_search input:hover {
+  filter: brightness(130%);
+}
+.taskman_search[style*="--theme: dark"] input {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+w-taskmanager {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+w-taskmanager .sidebar, w-taskmanager .main {
+  flex: 1;
+}
+w-taskmanager .sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 250px;
+  min-width: 50px;
+  padding: 0.25em;
+  height: 100%;
+  overflow-y: scroll;
+}
+w-taskmanager .sidebar spacer {
+  height: 100%;
+}
+w-taskmanager .sidebar .item {
+  display: flex;
+  align-items: center;
+  padding: 0.5em;
+  margin: 0.25em;
+  border-radius: 5px;
+}
+w-taskmanager .sidebar .item.view {
+  display: grid;
+  place-items: center;
+  max-width: 35px;
+}
+w-taskmanager .sidebar .item img {
+  height: 15px;
+  width: 15px;
+  margin-right: 0.5em;
+}
+w-taskmanager .sidebar .item:focus {
+  background: rgba(0, 0, 0, 0.015);
+  outline: 0;
+}
+w-taskmanager .sidebar .item:hover {
+  background: rgba(0, 0, 0, 0.025);
+}
+w-taskmanager .sidebar .item.active {
+  position: relative;
+  background: rgba(0, 0, 0, 0.1);
+}
+w-taskmanager .sidebar .item.active:before {
+  content: "";
+  position: absolute;
+  top: 25%;
+  bottom: 25%;
+  left: -0.5px;
+  height: 50%;
+  width: 3px;
+  background: navy;
+  border-radius: 5px;
+}
+w-taskmanager .sidebar.min {
+  max-width: 50px;
+}
+w-taskmanager .sidebar.min .item span {
+  display: none;
+}
+w-taskmanager .main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border-top-left-radius: 10px;
+}
+w-taskmanager .main .titlebar {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  font-size: 0.9em;
+}
+w-taskmanager .main .titlebar .buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+  gap: 0.5em;
+  margin-top: -0.5em;
+}
+w-taskmanager .main .titlebar .buttons .seperator {
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+}
+w-taskmanager .main .titlebar .buttons .item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  padding: 0.5em;
+  font-size: 0.8em;
+}
+w-taskmanager .main .titlebar .buttons .item img {
+  width: 16px;
+  margin-bottom: -2px;
+}
+w-taskmanager .main .titlebar .buttons .item span {
+  margin-left: 0.5em;
+}
+w-taskmanager .main .titlebar .buttons .item[disabled] {
+  opacity: 0.5;
+}
+w-taskmanager .main .titlebar .buttons .item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+w-taskmanager .main .proc_list {
+  height: 100%;
+  width: auto;
+  overflow: scroll;
+}
+w-taskmanager .main .proc_list .processes_list {
+  display: table;
+  flex: 1;
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+w-taskmanager .main .proc_list .processes_list {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 0;
+  border-collapse: collapse;
+}
+w-taskmanager .main .proc_list .processes_list .row {
+  display: table-row;
+}
+w-taskmanager .main .proc_list .processes_list .cell {
+  display: table-cell;
+}
+w-taskmanager .main .proc_list .processes_list .headers {
+  height: 50px;
+  font-size: 0.7em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+w-taskmanager .main .proc_list .processes_list .headers .cell {
+  padding: 0.5em;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.95em;
+  vertical-align: bottom;
+  text-align: right;
+  max-width: 70px;
+  min-width: 70px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 0;
+  border-collapse: collapse;
+}
+w-taskmanager .main .proc_list .processes_list .headers .cell.seperator {
+  width: 100%;
+}
+w-taskmanager .main .proc_list .processes_list .headers .cell:not(.seperator):hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+w-taskmanager .main .proc_list .processes_list .headers .cell:nth-child(1) {
+  text-align: left;
+  min-width: 250px;
+}
+w-taskmanager .main .proc_list .processes_list .headers .cell:nth-child(2) {
+  text-align: left;
+  min-width: 100px;
+}
+w-taskmanager .main .proc_list .processes_list .headers .cell:first-of-type {
+  padding-left: 1em;
+}
+w-taskmanager .main .proc_list .processes_list .headers .cell:last-of-type {
+  width: 100%;
+}
+w-taskmanager .main .proc_list .processes_list .headers .cell h6 {
+  font-size: 1.4em;
+  color: #000;
+}
+w-taskmanager .main .proc_list .processes_list .headers2 {
+  border-bottom: 0;
+}
+w-taskmanager .main .proc_list .processes_list .headers2 h6 {
+  display: block;
+  margin-top: 1em;
+}
+w-taskmanager .main .proc_list .processes_list .headers2 .cell {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+w-taskmanager .main .proc_list .processes_list .headers2 .apps {
+  padding: 0.5em 1em;
+  border-bottom: 0;
+}
+w-taskmanager .main .proc_list .processes_list .headers2 .apps h5 {
+  font-size: 1.2em;
+}
+w-taskmanager .main .proc_list .processes_list .task-item {
+  border-bottom: 0;
+  text-align: right;
+  font-size: 0.85em;
+}
+w-taskmanager .main .proc_list .processes_list .task-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+w-taskmanager .main .proc_list .processes_list .task-item .cell {
+  background: rgba(135, 158, 192, 0.25);
+  padding: 0.5em;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-collapse: collapse;
+}
+w-taskmanager .main .proc_list .processes_list .task-item .cell:nth-child(2) {
+  background: transparent;
+}
+w-taskmanager .main .proc_list .processes_list .task-item .cell:first-of-type {
+  background: transparent;
+  text-align: left;
+  padding-left: 2em;
+}
+w-taskmanager .main .proc_list .processes_list .task-item .cell:first-of-type img {
+  width: 16px;
+}
+w-taskmanager .main .performance_pane {
+  display: flex;
+  gap: 0.5em;
+  padding: 1em;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+w-taskmanager .main .performance_pane w-taskman-perfgraph {
+  position: relative;
+  display: block;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  aspect-ratio: 3/1;
+  overflow: hidden;
+}
+w-taskmanager .main .performance_pane w-taskman-perfgraph canvas {
+  position: absolute;
+  top: -20px;
+  min-height: 175%;
+  min-width: 115%;
+  margin-left: -4em;
+}
+w-taskmanager .main .performance_pane .sidebar-performance, w-taskmanager .main .performance_pane .main-performance {
+  flex: 1;
+}
+w-taskmanager .main .performance_pane .sidebar-performance {
+  max-width: 30%;
+}
+w-taskmanager .main .performance_pane .sidebar-performance .item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.5em;
+  line-height: 5px;
+  width: 100%;
+}
+w-taskmanager .main .performance_pane .sidebar-performance .item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+w-taskmanager .main .performance_pane .sidebar-performance .item .graph, w-taskmanager .main .performance_pane .sidebar-performance .item .type {
+  flex: 1;
+}
+w-taskmanager .main .performance_pane .sidebar-performance .item .graph w-taskman-perfgraph {
+  aspect-ratio: 2/1;
+}
+w-taskmanager .main .performance_pane .sidebar-performance .item .type small {
+  color: rgba(0, 0, 0, 0.5);
+}
+w-taskmanager .main .performance_pane .main-performance {
+  padding: 1em;
+}
+w-taskmanager[style*="--theme: dark"] .sidebar .item img {
+  filter: invert(1);
+}
+w-taskmanager[style*="--theme: dark"] .sidebar .item.active {
+  background: rgba(255, 255, 255, 0.1);
+}
+w-taskmanager[style*="--theme: dark"] .sidebar .item.active:before {
+  background: #63ade5;
+}
+w-taskmanager[style*="--theme: dark"] .main {
+  color: #fff;
+  background: #191919;
+}
+w-taskmanager[style*="--theme: dark"] .main .titlebar .item img {
+  filter: invert(1);
+}
+w-taskmanager[style*="--theme: dark"] .main .titlebar .item:not([disabled]):hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+w-taskmanager[style*="--theme: dark"] .main .proc_list {
+  color: #fff;
+}
+w-taskmanager[style*="--theme: dark"] .main .proc_list .processes_list {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+w-taskmanager[style*="--theme: dark"] .main .proc_list .processes_list .headers {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+w-taskmanager[style*="--theme: dark"] .main .proc_list .processes_list .headers .cell {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+w-taskmanager[style*="--theme: dark"] .main .proc_list .processes_list .headers .cell:not(.seperator):hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+w-taskmanager[style*="--theme: dark"] .main .proc_list .processes_list .headers .cell h6 {
+  color: #fff;
+}
+w-taskmanager[style*="--theme: dark"] .main .proc_list .processes_list .headers2 .cell {
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+w-taskmanager[style*="--theme: dark"] .main .proc_list .processes_list .task-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+w-taskmanager[style*="--theme: dark"] .main .proc_list .processes_list .task-item .cell {
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+w-settings {
+  display: flex;
+  gap: 2em;
+  height: 100%;
+  padding: 0.75em;
+  overflow: hidden;
+}
+w-settings .sidebar {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  max-width: 300px;
+}
+w-settings .sidebar .user {
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+  border-radius: 5px;
+  margin-bottom: 1em;
+  font-size: 0.8em;
+  transition: all 0.2s ease-in-out;
+}
+w-settings .sidebar .user:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+w-settings .sidebar .user div:first-of-type {
+  padding: 0.5em;
+  padding-left: 1em;
+}
+w-settings .sidebar .user div:first-of-type img {
+  border-radius: 100%;
+  aspect-ratio: 1/1;
+  width: 60px;
+}
+w-settings .sidebar .search {
+  display: flex;
+  align-items: center;
+}
+w-settings .sidebar .search input {
+  position: relative;
+  margin: 1em 0;
+  margin-bottom: 1.5em;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  padding: 0.3em 0.5em;
+  font-size: 0.9em;
+  width: 100%;
+  z-index: 0;
+}
+w-settings .sidebar .search input:hover {
+  background: rgba(0, 0, 0, 0.015);
+}
+w-settings .sidebar .search input:focus {
+  outline: 0;
+  background: #fff;
+  border-bottom: 2px solid navy;
+}
+w-settings .sidebar .search img {
+  margin-left: -2em;
+  margin-top: -0.5em;
+  max-width: 14px;
+  max-height: 14px;
+  border-radius: 3px;
+  z-index: 1;
+}
+w-settings .sidebar .search img:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+w-settings .sidebar .sidebar_items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  overflow-y: scroll;
+}
+w-settings .sidebar .sidebar_items w-settings-sidebar-item {
+  display: flex;
+  gap: 1em;
+  padding: 0.5em;
+  padding-left: 1em;
+  border-radius: 5px;
+}
+w-settings .sidebar .sidebar_items w-settings-sidebar-item.active {
+  position: relative;
+  background: rgba(0, 0, 0, 0.065);
+}
+w-settings .sidebar .sidebar_items w-settings-sidebar-item.active:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 25%;
+  width: 4px;
+  height: 50%;
+  border-radius: 10px;
+  background: navy;
+}
+w-settings .sidebar .sidebar_items w-settings-sidebar-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+w-settings .sidebar .sidebar_items w-settings-sidebar-item[disabled] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+w-settings .sidebar .sidebar_items w-settings-sidebar-item img {
+  width: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+w-settings .main {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  flex: 1;
+}
+w-settings .main .menu {
+  display: none;
+}
+w-settings .main .menu .heading {
+  display: flex;
+  justify-content: space-between;
+}
+w-settings .main .menu .heading .comp {
+  display: flex;
+  gap: 1em;
+}
+w-settings .main .menu .heading .comp .desktop {
+  width: 100px;
+  border: 4px solid #000;
+  border-radius: 5px;
+}
+w-settings .main .menu .heading .comp div {
+  font-size: 0.8em;
+}
+w-settings .main .menu .heading .updates {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  border-radius: 4px;
+  padding: 0 0.5em;
+  margin-right: 1em;
+  text-align: right;
+  font-size: 0.9em;
+}
+w-settings .main .menu .heading .updates:hover {
+  background: rgba(0, 0, 0, 0.025);
+}
+w-settings .main .menu .heading .updates img {
+  max-width: 24px;
+}
+w-settings .main .options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding-right: 1em;
+  margin-top: 2em;
+}
+w-settings .main .options w-settings-option {
+  display: flex;
+  align-items: center;
+  background: #fbfbfd;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  padding: 1em;
+}
+w-settings .main .options w-settings-option[disabled] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+w-settings .main .options w-settings-option:hover {
+  background: #f6f6f6;
+}
+w-settings .main .options w-settings-option .image {
+  min-width: 50px;
+}
+w-settings .main .options w-settings-option .image img {
+  width: 25px;
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+w-settings .main .options w-settings-option .body {
+  flex: 1;
+}
+w-settings .main .options w-settings-option .body small {
+  font-size: 0.8em;
+  color: #000 88;
+}
+w-settings .main .menu-personalisation {
+  container-type: inline-size;
+  container-name: menu-personalisation;
+}
+@container menu-personalisation (width < 700px) {
+  w-settings .main .menu-personalisation .themes {
+    flex-direction: column;
+  }
+}
+w-settings .main .menu-personalisation .themes {
+  display: flex;
+  gap: 1em;
+}
+w-settings .main .menu-personalisation .themes .theme-preview {
+  width: 40%;
+  max-width: 300px;
+}
+w-settings .main .menu-personalisation .themes .theme-preview .wallpaper-preview {
+  position: relative;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 10px solid #000;
+  aspect-ratio: 16/9;
+  height: 150px;
+  border-radius: 15px;
+}
+w-settings .main .menu-personalisation .themes .theme-preview .wallpaper-preview:after {
+  content: " ";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 15px;
+  background: #d7deed;
+}
+w-settings .main .menu-personalisation .themes .theme-preview .wallpaper-preview span {
+  position: absolute;
+  bottom: 20px;
+  right: 5px;
+  display: block;
+  background: #d3d9e9;
+  width: 75px;
+  max-width: 75px !important;
+  height: 85px;
+  padding: 0.25em 0.5em;
+  overflow-wrap: break-word;
+  letter-spacing: -2px;
+  line-height: 10px;
+  border-radius: 5px;
+}
+w-settings .main .menu-personalisation .themes .theme-preview .wallpaper-preview span:after {
+  content: " ";
+  position: absolute;
+  bottom: 10px;
+  right: 25%;
+  width: 30px;
+  height: 10px;
+  border-radius: 3px;
+  background: #0078d4;
+}
+w-settings .main .menu-personalisation .themes .theme-grid {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+w-settings .main .menu-personalisation .themes .theme-grid [data-theme] {
+  position: relative;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100px;
+  aspect-ratio: 1/0.9;
+  border-radius: 5px;
+}
+w-settings .main .menu-personalisation .themes .theme-grid [data-theme]:hover {
+  outline: 3px solid rgba(0, 0, 0, 0.2);
+}
+w-settings .main .menu-personalisation .themes .theme-grid [data-theme] span {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background: #d3d9e9;
+  width: 45px;
+  aspect-ratio: 1/1;
+  border-radius: 5px;
+}
+w-settings .main .menu-personalisation .themes .theme-grid [data-theme] span:after {
+  content: " ";
+  position: absolute;
+  bottom: 7px;
+  left: 24%;
+  width: 25px;
+  height: 10px;
+  border-radius: 3px;
+  background: #0078d4;
+}
+w-settings.min .sidebar {
+  display: none;
+  position: absolute;
+  top: 2.5em;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, #f1f1f1 5%);
+  padding: 1em;
+  z-index: 99;
+}
+w-settings.min .main {
+  padding-left: 1em;
+}
+w-settings[style*="--theme: dark"] .comp span, w-settings[style*="--theme: dark"] a {
+  color: #09f !important;
+}
+w-settings[style*="--theme: dark"] .search input {
+  background: #2b2e33;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+w-settings[style*="--theme: dark"] .search input:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+w-settings[style*="--theme: dark"] .search img {
+  filter: invert(1);
+}
+w-settings[style*="--theme: dark"] w-settings-sidebar-item.active {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+w-settings[style*="--theme: dark"] w-settings-sidebar-item.active:before {
+  background: #09f !important;
+}
+w-settings[style*="--theme: dark"] w-settings-sidebar-item:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+w-settings[style*="--theme: dark"] w-settings-option {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+w-settings[style*="--theme: dark"] w-settings-option img {
+  filter: invert(1);
+}
+w-settings[style*="--theme: dark"].min .sidebar {
+  background: linear-gradient(to bottom, transparent, #202020 5%);
+}
+w-settings[style*="--theme: dark"] .wallpaper-preview:after {
+  background: #202c63 !important;
+}
+w-settings[style*="--theme: dark"] .wallpaper-preview span {
+  background: #1d2960 !important;
+  color: #fff;
+}
+w-settings[style*="--theme: dark"] .wallpaper-preview span:after {
+  background: #0078d4 !important;
+}
+w-settings[style*="--theme: dark"] .theme-grid [data-theme]:hover {
+  outline: 3px solid rgba(255, 255, 255, 0.3) !important;
+}
+.settings_burger {
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center center;
+  width: 20px;
+  padding: 1em;
+  border-radius: 5px;
+  aspect-ratio: 1/1;
+  margin-right: 0.5em;
+}
+.settings_burger:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.settings_burger:active {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+@keyframes windowFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+@keyframes windowFadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+    filter: blur(10px);
+  }
+}
+@keyframes windowZoomUp {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+@keyframes windowZoomDown {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8) translateY(100%);
+  }
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(500px);
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slideFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(500px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideFadeUpSmall {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(500px);
+  }
+}
+@keyframes slideFadeDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(500px);
+  }
+}
+@keyframes slideLeft {
+  from {
+    transform: translateX(500px);
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideFadeRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(500px);
+  }
+}
+@keyframes bounceInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
